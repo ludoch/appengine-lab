@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+    <servlet>
+        <servlet-name>HelloWordServlet</servlet-name>
+        <servlet-class>fr.devoxx.lepresidentest.HelloWordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VoteServlet</servlet-name>
+        <servlet-class>fr.devoxx.lepresidentest.VoteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>fr.devoxx.lepresidentest.UploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReleaseDateCron</servlet-name>
+        <servlet-class>fr.devoxx.lepresidentest.ReleaseDateCron</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>mailhandler</servlet-name>
+        <servlet-class>fr.devoxx.lepresidentest.MailHandlerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloWordServlet</servlet-name>
+        <url-pattern>/helloword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoteServlet</servlet-name>
+        <url-pattern>/vote/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReleaseDateCron</servlet-name>
+        <url-pattern>/ReleaseDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mailhandler</servlet-name>
+        <url-pattern>/_ah/mail/*</url-pattern>
+    </servlet-mapping>
+    <!-- On indique que ces URLs ne doivent être accéssible que par un administrateur AppEngine -->
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/_ah/mail/*</url-pattern>
+            <url-pattern>/ReleaseDate</url-pattern>
+            <url-pattern>/admin.jsp</url-pattern>
+            <url-pattern>/upload</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
